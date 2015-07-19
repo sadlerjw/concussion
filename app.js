@@ -23,6 +23,16 @@ var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
+app.locals.title = "Example blog";
+app.locals.author = {
+    "name": "Jason Sadler",
+    "twitter": {
+        "username": "sadlerjw",
+        "url": "https://twitter.com/sadlerjw"
+    }
+};
+
+
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
