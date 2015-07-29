@@ -1,8 +1,11 @@
 var md = require('markdown-it')();
+var hljs = require('markdown-it-highlightjs');
 var qfs = require('q-io/fs');
 var Q = require('q');
 var moment = require('moment');
 var yaml = require('js-yaml');
+
+md.use(hljs);
 
 module.exports = function(postDirectory, cacheByPath, listingCache) {
 
