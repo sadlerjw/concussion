@@ -88,7 +88,7 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 	}
 
 	function parseFileContents(fileContents) {
-		var results = fileContents.match(/^---\n((?:.|\n)*)---\n\s*((?:.|\n)*)$/)
+		var results = fileContents.match(/^---\n((?:.|\n)*?)---\n\s*((?:.|\n)*)$/)
 		if (results.length > 2) {
 			var metadata = results[1];
 			var markdown = results[2];
