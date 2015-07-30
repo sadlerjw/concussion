@@ -10,6 +10,31 @@ md.use(hljs);
 module.exports = function(postDirectory, cacheByPath, listingCache) {
 
 	function Article(path, metadata, renderedText) {
+		if (path == null) {
+			throw new Error('Won\'t display article at ' + path + ' (no path)');
+		}
+		if (metadata == null) {
+			throw new Error('Won\'t display article at ' + path + ' (metadata is missing)');
+		}
+		if (renderedText == null) {
+			throw new Error('Won\'t display article at ' + path + ' (no rendered content)');
+		}
+
+		if ('published' in metadata && metadata.published !== true) {
+			throw new Error('Won\'t display article at ' + path + ' (marked unpublished)');
+		}
+		if ('date' in metadata) {
+			metadata.date = moment(new Date(metadata.date));
+			if (!metadata.date.isValid()) {
+				throw new Error('Won\'t display article at ' + path + ' (date is invalid)');
+			}
+		} else {
+			throw new Error('Won\'t display article at ' + path + ' (no date)');
+		}
+		if (!('title' in metadata) || metadata.title == null || metadata.title.length == 0) {
+			throw new Error('Won\'t display article at ' + path + ' (no title)');
+		}
+
 		this.content = renderedText || '';
 		this.path = path || '';
 		this.date = metadata.date ? moment(new Date(metadata.date)) : null;
@@ -25,8 +50,8 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 
 		return getFileContents(path)
 			.then(function(fileContents) {
-				console.log('Fetched article from disk: ' + path);
 				var article = new Article(path, getMetadata(fileContents), getRenderedArticleText(fileContents));
+
 				// cacheByPath.set(path, article);
 				return article;
 			});
@@ -66,8 +91,17 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 				// 	return article;
 				// }
 			});
-			return Q.all(articlePromises);			
-		}).then(function(articles) {
+			return Q.allSettled(articlePromises);
+		}).then(function(articlePromises) {
+			var articles = []
+			articlePromises.forEach(function(articlesPromise) {
+				if (articlesPromise.state === "fulfilled") {
+					var article = articlesPromise.value;
+					articles.push(article);
+				} else {
+					console.log(articlesPromise.reason);
+				}
+			});
 			return articles.sort(function(a, b) {
 					return b.date.unix() - a.date.unix();
 			});
