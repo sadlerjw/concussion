@@ -31,17 +31,10 @@ module.exports = function(app) {
 		});
 	});
 
-	router.get(/^\/(\d{4})\/(\d{2})\/(\d{2})\/(\S+)$/, function(req, res, next) {
-		var year = req.params[0];
-		var month = req.params[1];
-		var day = req.params[2];
-		var name = req.params[3];
-		
-		var date = moment([year, month, day]);
-
-		Article.find('/' + year + '/' + month + '/' + day + '/' + name).then(function(article) {
+	// Anything without a '.' in the name. Articles should never have dots in the path.
+	router.get(/^[^\.]*$/, function(req, res, next) {
+		Article.find(req.path).then(function(article) {
 			if (article) {
-				console.log(article);
 				res.render('article', { article: article })
 			} else {
 				next();
