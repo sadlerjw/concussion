@@ -125,3 +125,12 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
 .article p {
   line-height: 150%;
 }
+.pagination {
+  content: '';
+  display: table;
+  margin: 1em 0;
+  width: 100%;
+}
+.pagination .previousPage {
+  float: right;
+}

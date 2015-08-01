@@ -1,5 +1,5 @@
 ---
-title: Mocked Post #1
+title: Lorem Ipsum is Fun
 date: 2014-08-22T10:55:00Z
 ---
 

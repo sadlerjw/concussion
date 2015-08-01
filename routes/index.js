@@ -24,10 +24,39 @@ module.exports = function(app) {
 
 	var router = express.Router();
 
+	var pageSize = 1;
+
+
 	/* GET home page. */
-	router.get('/', function(req, res) {
+	router.get('/', function(req, res, next) {
 		Article.findAll().then(function(articles){
-			res.render('index', { articles: articles });
+			var page = 1;
+			var pages = Math.ceil(articles.length / pageSize);
+			if ('page' in req.query) {
+				var queryPage = parseInt(req.query.page);
+				if (queryPage !== NaN) {
+					page = queryPage;
+				}
+			}
+			var firstArticleIndex = (page - 1) * pageSize;
+			var pagedArticles = [];
+			if (firstArticleIndex < articles.length) {
+				pagedArticles = articles.slice(firstArticleIndex, firstArticleIndex + pageSize);
+			}
+			if (pagedArticles.length > 0) {
+				var context = {articles: pagedArticles};
+				if (page < pages) {
+					context.nextPage = page + 1;
+				}
+				if (page > 1) {
+					context.previousPage = page - 1;
+				}
+				res.render('index', context);
+			} else {
+				next();
+			}
+		}).fail(function(error) {
+			next();
 		});
 	});
 
@@ -43,24 +72,6 @@ module.exports = function(app) {
 			next();
 		});
 	});
-
-	function getArticlesForIndex(app) {
-		return {
-			"/2014/08/22/mocked-post-1": {
-				title: "Mocked Post #1",
-				subtitle: "The first post to show",
-				date: "2014/08/22",
-				path: "/2014/08/22/mocked-post-1",
-				content: "<p>Mauris maximus interdum fermentum. In sollicitudin, ligula a scelerisque interdum, neque purus elementum nibh, nec ultricies sapien lectus eu turpis. Sed vestibulum velit at nibh mattis varius. Donec sit amet accumsan arcu. Sed vel varius neque. Aliquam id fringilla tortor. Cras dapibus consectetur quam vel varius. Donec tempus ante quam, ac tincidunt ipsum commodo id.</p><p>Cras eu elit facilisis, cursus nulla quis, vulputate purus. Nullam porttitor luctus neque eu blandit. Quisque id sagittis magna. Aliquam faucibus quam non mattis interdum. Suspendisse sed lectus sem. Mauris consequat lobortis felis ut dictum. Vivamus eu ultricies lorem. Mauris gravida ligula sed purus fringilla cursus. Cras tincidunt, orci sit amet vehicula posuere, nisi ligula vestibulum dui, quis vestibulum magna nibh ut urna.</p>"
-			},
-			"/2014/01/01/another-mocked-post": {
-				title: "Another Mocked Post",
-				date: "2014/01/01",
-				path: "/2014/01/01/another-mocked-post",
-				content: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis erat bibendum sem viverra, et fermentum lorem vehicula. Pellentesque vestibulum, augue at auctor feugiat, nisi leo gravida sem, eu lobortis risus mauris non mauris. Morbi lectus nisl, scelerisque a ultrices et, tempor sagittis diam. Quisque ac sapien lobortis, sagittis lacus nec, suscipit quam. Sed elit odio, aliquam vitae egestas ut, scelerisque faucibus urna. Nunc rutrum accumsan augue. Nam rutrum consectetur tellus eget pulvinar. Quisque ex magna, ultrices ac lacinia eu, tempus a nisi. Nunc auctor a mauris quis lacinia. Fusce eget augue massa.</p>"
-			}
-		};
-	}
 
 	return router;
 }

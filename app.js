@@ -15,13 +15,16 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   partialsDir: ['views/partials/'],
   helpers: {
-    date: function(date) {
+    formatDate: function(date) {
         var then = moment(date);
         if (then.isValid()) {
             return then.format('LL');
         } else {
             return date;
         }
+    },
+    greater: function(a, b) {
+        return a > b;
     }
   }
 }));

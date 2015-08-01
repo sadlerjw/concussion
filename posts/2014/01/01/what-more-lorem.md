@@ -1,5 +1,5 @@
 ---
-title: Another Mocked Post
+title: What? More Lorem‽
 date: 2014-01-01T12:45:00Z
 ---
 
