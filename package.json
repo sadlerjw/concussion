@@ -27,6 +27,7 @@
     "gulp-less": "~3.0.1",
     "gulp-nodemon": "~2.0.2",
     "gulp-livereload": "~3.8.0",
-    "gulp-plumber": "~1.0.0"
+    "gulp-plumber": "~1.0.0",
+    "gulp-env": "^0.2.0"
   }
 }

@@ -35,15 +35,22 @@ var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
-app.locals.title = "Example Blog";
-app.locals.description = "An example blog using Concussion";
-app.locals.author = {
-    "name": "Jason Sadler",
-    "twitter": {
-        "username": "sadlerjw",
-        "url": "https://twitter.com/sadlerjw"
-    }
-};
+app.locals.author = {"name": process.env.BLOG_AUTHOR_NAME || "Unknown"};
+app.locals.title = process.env.BLOG_TITLE || (app.locals.author.name + "'s Blog");
+app.locals.description = process.env.BLOG_DESCRIPTION || "";
+
+if (process.env.BLOG_AUTHOR_TWITTER) {
+    app.locals.author.twitter = {
+        "username": process.env.BLOG_AUTHOR_TWITTER,
+        "url": "https://twitter.com/" + process.env.BLOG_AUTHOR_TWITTER
+    };
+}
+if (process.env.BLOG_AUTHOR_LINKEDIN) {
+    app.locals.author.linkedin = {
+        "url": process.env.BLOG_AUTHOR_LINKEDIN
+    };
+}
+
 app.locals.postDirectory = path.join(__dirname, 'posts/');
 
 
@@ -73,6 +80,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
+            status: err.status,
             error: err,
             title: 'error'
         });
@@ -85,6 +93,7 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
+        status: err.status,
         error: {},
         title: 'error'
     });

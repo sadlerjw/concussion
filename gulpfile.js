@@ -2,7 +2,8 @@ var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   plumber = require('gulp-plumber'),
   livereload = require('gulp-livereload'),
-  less = require('gulp-less');
+  less = require('gulp-less'),
+  env = require('gulp-env');
 
 gulp.task('less', function () {
   gulp.src('./public/css/*.less')
@@ -28,7 +29,20 @@ gulp.task('develop', function () {
   });
 });
 
+gulp.task('set-env', function () {
+  env({
+    vars: {
+      BLOG_TITLE: "Example blog",
+      BLOG_AUTHOR_NAME: "Jason Sadler",
+      BLOG_AUTHOR_TWITTER: "sadlerjw",
+      BLOG_DESCRIPTION: "An example blog using Concussion",
+      NODE_ENV: "development"
+    }
+  })
+});
+
 gulp.task('default', [
+  'set-env',
   'less',
   'develop',
   'watch'
