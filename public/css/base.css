@@ -134,3 +134,7 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
 .pagination .previousPage {
   float: right;
 }
+.error {
+  text-align: center;
+  margin: 3em auto;
+}
