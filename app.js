@@ -94,7 +94,7 @@ app.use(function(err, req, res, next) {
     res.render('error', {
         message: err.message,
         status: err.status,
-        error: {},
+        error: null,
         title: 'error'
     });
 });

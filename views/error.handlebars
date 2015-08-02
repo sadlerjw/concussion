@@ -2,9 +2,11 @@
 	<p>Oh dear. There's been a problem.</p>
 	<code class="hljs">
 	{{status}} {{ message }}
+	{{#if error}}
 	<pre>
 	{{ error.stack }}  
 	</pre>
+	{{/if}}
 	</code>
 </div>
 
