@@ -84,7 +84,6 @@ if (app.get('env') === 'development') {
             message: err.message,
             status: err.status,
             error: err,
-            title: 'error'
         });
     });
 }
@@ -97,7 +96,6 @@ app.use(function(err, req, res, next) {
         message: err.message,
         status: err.status,
         error: null,
-        title: 'error'
     });
 });
 
