@@ -19,7 +19,8 @@
     "markdown-it": "~4.4.0",
     "markdown-it-highlightjs": "~2.0.0",
     "moment": "~2.10.6",
-    "rss": "~1.1.1"
+    "rss": "~1.1.1",
+    "compression": "^1.5.2"
   },
   "devDependencies": {
     "generator-express": "^2.7.2",

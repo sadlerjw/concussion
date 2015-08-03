@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var exphbs  = require('express-handlebars');
 var moment = require('moment');
+var compression = require('compression');
 
 var app = express();
 
@@ -53,6 +54,7 @@ if (process.env.BLOG_AUTHOR_LINKEDIN) {
 
 app.locals.postDirectory = path.join(__dirname, 'posts/');
 
+app.use(compression());
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
