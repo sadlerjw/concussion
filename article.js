@@ -7,7 +7,14 @@ var yaml = require('js-yaml');
 
 md.use(hljs);
 
-module.exports = function(postDirectory, cacheByPath, listingCache) {
+module.exports = function(postDirectory, caches) {
+
+	if (!('articlesByPath' in caches)) {
+		caches.articlesByPath = {};
+	}
+	if (!('listings' in caches)) {
+		caches.listings = {};
+	}
 
 	function Article(path, metadata, renderedText) {
 		if (path == null) {
@@ -43,28 +50,30 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 	}
 
 	Article.find = function(path) {
-		// if (cacheByPath.has(path)) {
-		// 	console.log('Fetched article from cache: ' + path)
-		// 	return Q(cacheByPath.get(path));
-		// }
+		if (path in caches.articlesByPath) {
+			console.log('Cache hit: ' + path);
+			return caches.articlesByPath[path];
+		}
 
-		return getFileContents(path)
+		var promise = getFileContents(path)
 			.then(function(fileContents) {
 				var article = new Article(path, getMetadata(fileContents), getRenderedArticleText(fileContents));
-
-				// cacheByPath.set(path, article);
 				return article;
 			});
-		
+
+		console.log('Cache miss: ' + path);
+		caches.articlesByPath[path] = promise;
+		return promise;
 	}
 
 	Article.findAll = function(includeNonFeedableArticles) {
-		// if (listingCache.has('articlesPromise')) {
-		// 	console.log('Fetched all articles from cache');
-		// 	return listingCache.get('articlesPromise');
-		// }
+		var cacheKey = includeNonFeedableArticles ? 'allArticles' : 'feedableArticles';
+		if (cacheKey in caches.listings) {
+			console.log('Cache hit:  ' + cacheKey);
+			return caches.listings[cacheKey];
+		}
 
-		console.log('Searching ' + postDirectory);
+		console.log('Cache miss: ' + cacheKey);
 
 		var articlesPromise = qfs.listTree(postDirectory, function(filePath) {
 			if (!includeNonFeedableArticles) {
@@ -83,17 +92,6 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 
 				// Includes loading contents and rendering markdown
 				return Article.find(relativePath);
-
-				// The following does not load contents or metadata:
-				// 
-				// if (cacheByPath.has(relativePath)) {
-				// 	return cacheByPath.peek(relativePath);
-				// } else {
-				// 	var article = new Article(relativePath);
-				// 	console.log("Cache set: " + relativePath + " / " + article.title);
-				// 	cacheByPath.set(relativePath, article);
-				// 	return article;
-				// }
 			});
 			return Q.allSettled(articlePromises);
 		}).then(function(articlePromises) {
@@ -111,7 +109,7 @@ module.exports = function(postDirectory, cacheByPath, listingCache) {
 			});
 		});
 
-		// listingCache.set('articlesPromise', articlesPromise);
+		caches.listings[cacheKey] = articlesPromise;
 
 		return articlesPromise;
 	}

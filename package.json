@@ -12,7 +12,6 @@
     "debug": "~2.1.0",
     "express-handlebars": "~2.0.1",
     "highlight.js": "^8.6.0",
-    "lru-cache": "~2.6.5",
     "js-yaml": "~3.3.1",
     "q": "~1.4.1",
     "q-io": "~1.13.1",

@@ -1,27 +1,15 @@
 var express = require('express');
 var hljs = require('highlight.js');
 var moment = require('moment');
-var LRU = require('lru-cache');
 var RSS = require('rss');
 
 module.exports = function(app) {
 
-	if (app.locals.articlesByURL == undefined) {
-		app.locals.articlesByURL = LRU({
-			max: 20000,	// ~20MB based only on string size
-			length: function(article) {
-				return Math.max((article.markdown || '').length, (article.content || '').length);
-			}
-		});
-	}
-	if (app.locals.allArticles == undefined) {
-		app.locals.allArticles = LRU({
-			max: 1,
-			maxAge: 900000	// 15 minutes
-		});
+	if (!('caches' in app.locals)) {
+		app.locals.caches = {};
 	}
 
-	var Article = require('../article.js')(app.locals.postDirectory, app.locals.articlesByURL, app.locals.allArticles);
+	var Article = require('../article.js')(app.locals.postDirectory, app.locals.caches);
 
 	var router = express.Router();
 
