@@ -36,6 +36,8 @@ var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
+app.locals.pretty = false;
+
 app.locals.author = {"name": process.env.BLOG_AUTHOR_NAME || "Unknown"};
 app.locals.title = process.env.BLOG_TITLE || (app.locals.author.name + "'s Blog");
 app.locals.description = process.env.BLOG_DESCRIPTION || "";
