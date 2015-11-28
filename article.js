@@ -36,7 +36,7 @@ module.exports = function(postDirectory, caches) {
 				throw new Error('Won\'t display article at ' + path + ' (date is invalid)');
 			}
 		}
-		
+
 		if (!('title' in metadata) || metadata.title == null || metadata.title.length == 0) {
 			throw new Error('Won\'t display article at ' + path + ' (no title)');
 		}
@@ -78,7 +78,7 @@ module.exports = function(postDirectory, caches) {
 			if (!includeNonFeedableArticles) {
 				return filePath.match(/\/?\d{4}\/\d{2}\/\d{2}\/[^\/\\\s]+\.md$/) !== null;
 			} else {
-				return true;
+				return filePath.match(/.+\.md$/) !== null;
 			}
 		}).then(function(absolutePaths) {
 			return Q.all(absolutePaths.map(function(absolutePath) {

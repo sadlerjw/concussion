@@ -48,19 +48,7 @@ module.exports = function(app) {
 				next();
 			}
 		}).fail(function(error) {
-			next();
-		});
-	});
-
-	// Anything without a '.' in the name. Articles should never have dots in the path.
-	router.get(/^[^\.]*$/, function(req, res, next) {
-		Article.find(req.path).then(function(article) {
-			if (article) {
-				res.render('article', { article: article })
-			} else {
-				next();
-			}
-		}).fail(function(error) {
+			console.log(error);
 			next();
 		});
 	});
@@ -87,7 +75,63 @@ module.exports = function(app) {
 			console.log(error);
 			next();
 		})
-	})
+	});
+
+	router.get('/archive', function(req, res, next) {
+		Article.findAll(true).then(function(articles) {
+			var articlesByYear = {};
+			var undatedArticles = [];
+			var years = [];
+
+			articles.forEach(function(article) {
+				var group;
+				if (article.date !== null) {
+					group = JSON.stringify(article.date.year());
+				}
+				if (group == null) {
+					undatedArticles.push(article);
+				} else {
+					if (years.indexOf(group) == -1) {
+						years.push(group);
+						articlesByYear[group] = { year: group, articles: []};
+					}					
+					articlesByYear[group].articles.push(article);
+				}
+			});
+
+			var archive = [];
+
+			years.forEach(function(year) {
+				archive.push(articlesByYear[year]);
+			})
+
+			if (undatedArticles.length > 0) {
+				undatedArticles.sort(function(a, b) {
+					return a.title.localeCompare(b.title);
+				})
+				archive.push({year: "Undated", articles: undatedArticles});
+			}			
+
+			res.render('archive', { archive: archive })
+		}).fail(function(error){ 
+			console.log(error);
+			next();
+		});
+	});
+
+	// Anything without a '.' in the name. Articles should never have dots in the path.
+	router.get(/^[^\.]*$/, function(req, res, next) {
+		Article.find(req.path).then(function(article) {
+			if (article) {
+				res.render('article', { article: article })
+			} else {
+				next();
+			}
+		}).fail(function(error) {
+			console.log(error);
+			next();
+		});
+	});
 
 	function urlForPath(req, path) {
 		return req.protocol + "://" + req.hostname + path;
