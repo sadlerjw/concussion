@@ -35,9 +35,8 @@ module.exports = function(postDirectory, caches) {
 			if (!metadata.date.isValid()) {
 				throw new Error('Won\'t display article at ' + path + ' (date is invalid)');
 			}
-		} else {
-			throw new Error('Won\'t display article at ' + path + ' (no date)');
 		}
+		
 		if (!('title' in metadata) || metadata.title == null || metadata.title.length == 0) {
 			throw new Error('Won\'t display article at ' + path + ' (no title)');
 		}
@@ -105,7 +104,12 @@ module.exports = function(postDirectory, caches) {
 				}
 			});
 			return articles.sort(function(a, b) {
-					return b.date.unix() - a.date.unix();
+				if (a.date === null) {
+					return b;
+				} else if (b.date === null) {
+					return a;
+				}
+				return b.date.unix() - a.date.unix();
 			});
 		});
 
