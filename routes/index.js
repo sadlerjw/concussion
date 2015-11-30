@@ -112,7 +112,7 @@ module.exports = function(app) {
 				archive.push({year: "Undated", articles: undatedArticles});
 			}			
 
-			res.render('archive', { archive: archive })
+			res.render('archive', { title: "Archive - " + app.locals.title, archive: archive })
 		}).fail(function(error){ 
 			console.log(error);
 			next();
@@ -123,7 +123,7 @@ module.exports = function(app) {
 	router.get(/^[^\.]*$/, function(req, res, next) {
 		Article.find(req.path).then(function(article) {
 			if (article) {
-				res.render('article', { article: article })
+				res.render('article', { title: article.title + " - " + app.locals.title, article: article })
 			} else {
 				next();
 			}
