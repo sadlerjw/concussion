@@ -1,8 +1,8 @@
 {{#with article}}
 <div class="article">
 	<h1 class="title">{{title}}</h1>
-	{{#if subtitle}}
-		<h2 class="subtitle">{{subtitle}}</h2>
+	{{#if metadata.subtitle}}
+		<h2 class="subtitle">{{metadata.subtitle}}</h2>
 	{{/if}}
 	{{#if date}}
 	<h5 class="date">{{formatDate date}}</h5>
