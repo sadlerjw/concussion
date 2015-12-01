@@ -1,0 +1,33 @@
+@import (inline) "code.css";
+
+.box-shadow (@string) {
+	-webkit-box-shadow: @string;
+	-moz-box-shadow:    @string;
+	box-shadow:         @string;
+}
+
+#top {
+	#header {
+		font-size: 3em;
+	}
+	#nav {
+		ul  {
+			padding: 0 0 1em 0;
+			border-bottom: 1px solid black;
+			li {
+				list-style: none;
+				display: inline;
+				margin: 0 1em;
+			}
+		}
+	}
+}
+
+.article {
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+
+	p {
+		line-height: 150%;
+	}
+}

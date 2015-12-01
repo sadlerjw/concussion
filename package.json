@@ -1,14 +1,24 @@
 {
-  "name": "blog",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "Concussion",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "express": "~4.12.0",
+    "serve-favicon": "~2.2.0",
+    "morgan": "~1.5.0",
+    "debug": "~2.1.0",
+    "express-handlebars": "~2.0.1",
+    "highlight.js": "^8.6.0"
+  },
   "devDependencies": {
-    "generator-express": "^2.7.2"
+    "generator-express": "^2.7.2",
+    "gulp": "~3.8.10",
+    "gulp-less": "~3.0.1",
+    "gulp-nodemon": "~2.0.2",
+    "gulp-livereload": "~3.8.0",
+    "gulp-plumber": "~1.0.0"
   }
 }
