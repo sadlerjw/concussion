@@ -5,6 +5,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var exphbs  = require('express-handlebars');
+var moment = require('moment');
 
 var routes = require('./routes/index');
 
@@ -14,7 +15,17 @@ var app = express();
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
-  partialsDir: ['views/partials/']
+  partialsDir: ['views/partials/'],
+  helpers: {
+    date: function(date) {
+        var then = moment(date);
+        if (then.isValid()) {
+            return then.format('LL');
+        } else {
+            return date;
+        }
+    }
+  }
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');

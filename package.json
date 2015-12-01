@@ -11,7 +11,8 @@
     "morgan": "~1.5.0",
     "debug": "~2.1.0",
     "express-handlebars": "~2.0.1",
-    "highlight.js": "^8.6.0"
+    "highlight.js": "^8.6.0",
+    "moment": "^2.10.6"
   },
   "devDependencies": {
     "generator-express": "^2.7.2",
