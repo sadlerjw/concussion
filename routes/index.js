@@ -37,9 +37,11 @@ module.exports = function(app) {
 				var context = {articles: pagedArticles};
 				if (page < pages) {
 					context.nextPage = page + 1;
+					context.pagination = true;
 				}
 				if (page > 1) {
 					context.previousPage = page - 1;
+					context.pagination = true;
 				}
 				res.render('index', context);
 			} else {

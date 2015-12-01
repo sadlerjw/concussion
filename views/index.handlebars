@@ -3,6 +3,7 @@
 <hr class="articleDivider" />
 {{/each}}
 
+{{#if pagination}}
 <div class="pagination">
 	{{#if nextPage }}
 		<a class="nextPage" href="?page={{nextPage}}">&lsaquo; Older</a>
@@ -11,3 +12,4 @@
 		<a class="previousPage" href="?page={{previousPage}}">Newer &rsaquo;</a>
 	{{/if}}
 </div>
+{{/if}}
