@@ -42,6 +42,7 @@ app.locals.author = {
         "url": "https://twitter.com/sadlerjw"
     }
 };
+app.locals.postDirectory = path.join(__dirname, 'posts/');
 
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));

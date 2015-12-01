@@ -12,7 +12,10 @@
     "debug": "~2.1.0",
     "express-handlebars": "~2.0.1",
     "highlight.js": "^8.6.0",
-    "moment": "^2.10.6"
+    "moment": "^2.10.6",
+    "q": "^1.4.1",
+    "q-io": "^1.13.1",
+    "markdown-it": "^5.0.2"
   },
   "devDependencies": {
     "generator-express": "^2.7.2",
