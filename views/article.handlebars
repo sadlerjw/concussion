@@ -1,10 +1,12 @@
 {{#with article}}
 <div class="article">
-	<h1 class="title">{{title}}</h>
+	<h1 class="title">{{title}}</h1>
 	{{#if subtitle}}
 		<h2 class="subtitle">{{subtitle}}</h2>
 	{{/if}}
-	<h5 class="date">{{date}}</h5>
+	{{#if date}}
+	<h5 class="date">{{date date}}</h5>
+	{{/if}}
 
 	{{{content}}}
 </div>

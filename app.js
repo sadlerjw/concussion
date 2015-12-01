@@ -7,8 +7,6 @@ var logger = require('morgan');
 var exphbs  = require('express-handlebars');
 var moment = require('moment');
 
-var routes = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -49,6 +47,7 @@ app.locals.postDirectory = path.join(__dirname, 'posts/');
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index')(app);
 app.use('/', routes);
 
 /// catch 404 and forward to error handler

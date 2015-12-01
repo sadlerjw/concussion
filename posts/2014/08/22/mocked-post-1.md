@@ -1,5 +1,7 @@
-Mocked Post #1
-============================
+---
+title: Mocked Post #1
+date: 2014-08-22T10:55:00Z
+---
 
 Mauris maximus interdum fermentum. In sollicitudin, ligula a scelerisque interdum, neque purus elementum nibh, nec ultricies sapien lectus eu turpis. Sed vestibulum velit at nibh mattis varius. Donec sit amet accumsan arcu. Sed vel varius neque. Aliquam id fringilla tortor. Cras dapibus consectetur quam vel varius. Donec tempus ante quam, ac tincidunt ipsum commodo id.
 

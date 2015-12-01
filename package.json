@@ -15,7 +15,9 @@
     "moment": "^2.10.6",
     "q": "^1.4.1",
     "q-io": "^1.13.1",
-    "markdown-it": "^5.0.2"
+    "markdown-it": "^5.0.2",
+    "lru-cache": "~2.6.5",
+    "js-yaml": "~3.3.1"
   },
   "devDependencies": {
     "generator-express": "^2.7.2",
