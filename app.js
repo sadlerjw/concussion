@@ -35,7 +35,8 @@ var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
-app.locals.title = "Example blog";
+app.locals.title = "Example Blog";
+app.locals.description = "An example blog using Concussion";
 app.locals.author = {
     "name": "Jason Sadler",
     "twitter": {

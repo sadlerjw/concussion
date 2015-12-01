@@ -2,6 +2,7 @@ var express = require('express');
 var hljs = require('highlight.js');
 var moment = require('moment');
 var LRU = require('lru-cache');
+var RSS = require('rss');
 
 module.exports = function(app) {
 
@@ -24,12 +25,13 @@ module.exports = function(app) {
 
 	var router = express.Router();
 
-	var pageSize = 1;
+	var pageSize = 5;
+	var itemsForRSS = 15;
 
 
 	/* GET home page. */
 	router.get('/', function(req, res, next) {
-		Article.findAll().then(function(articles){
+		Article.findAll(false).then(function(articles){
 			var page = 1;
 			var pages = Math.ceil(articles.length / pageSize);
 			if ('page' in req.query) {
@@ -72,6 +74,34 @@ module.exports = function(app) {
 			next();
 		});
 	});
+
+	router.get('/rss.xml', function(req, res, next) {
+		var feed = new RSS({
+			title: req.app.locals.title,
+			description: req.app.locals.description,
+			feed_url: urlForPath(req, '/rss.xml'),
+			site_url: urlForPath(req, '/')
+		});
+		Article.findAll(false).then(function(articles) {
+			articles.slice(0, itemsForRSS).forEach(function(article) {
+				feed.item({
+					title: article.title,
+					description: article.content,
+					url: urlForPath(req, article.path),
+					date: article.date.toISOString(),
+					author: req.app.locals.author.name
+				});
+			})
+			res.send(feed.xml({indent:true}));
+		}).fail(function(error){ 
+			console.log(error);
+			next();
+		})
+	})
+
+	function urlForPath(req, path) {
+		return req.protocol + "://" + req.hostname + path;
+	}
 
 	return router;
 }
