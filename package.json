@@ -6,19 +6,18 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "~4.12.0",
-    "serve-favicon": "~2.2.0",
-    "morgan": "~1.5.0",
-    "debug": "~2.1.0",
+    "express": "~4.13.3",
+    "serve-favicon": "~2.3.0",
+    "morgan": "~1.6.1",
     "express-handlebars": "~2.0.1",
     "highlight.js": "^8.6.0",
-    "js-yaml": "~3.3.1",
+    "js-yaml": "~3.4.6",
     "q": "~1.4.1",
     "q-io": "~1.13.1",
-    "markdown-it": "~4.4.0",
+    "markdown-it": "~5.0.2",
     "markdown-it-highlightjs": "~2.0.0",
     "moment": "~2.10.6",
-    "rss": "~1.1.1",
+    "rss": "~1.2.1",
     "compression": "^1.5.2"
   },
   "devDependencies": {
@@ -26,8 +25,9 @@
     "gulp": "~3.8.10",
     "gulp-less": "~3.0.1",
     "gulp-nodemon": "~2.0.2",
-    "gulp-livereload": "~3.8.0",
+    "gulp-livereload": "~3.8.1",
     "gulp-plumber": "~1.0.0",
-    "gulp-env": "^0.2.0"
+    "gulp-env": "^0.2.0",
+    "debug": "~2.2.0"
   }
 }
