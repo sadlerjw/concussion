@@ -1,4 +1,4 @@
-var md = require('markdown-it')({html: true});
+var md = require('markdown-it')({html: true, typographer: true});
 var hljs = require('markdown-it-highlightjs');
 var qfs = require('q-io/fs');
 var Q = require('q');

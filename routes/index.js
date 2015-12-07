@@ -62,10 +62,22 @@ module.exports = function(app) {
 		});
 		Article.findAll(false).then(function(articles) {
 			articles.slice(0, itemsForRSS).forEach(function(article) {
+				// Add permalink to end of article:
+				var permalink = urlForPath(req, article.path);
+				var content = article.content + "<p><a href=\"" + permalink + "\">Permalink</a></p>";
+
+				var title = article.title;
+				var url = permalink;
+				if ('link' in article.metadata) {
+					title = '→ ' + title;
+					url = article.metadata.link;
+				}
+
 				feed.item({
-					title: article.title,
-					description: article.content,
-					url: urlForPath(req, article.path),
+					title: title,
+					description: content,
+					url: url,
+					guid: permalink,
 					date: article.date.toISOString(),
 					author: req.app.locals.author.name
 				});

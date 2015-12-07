@@ -122,6 +122,9 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
   margin-top: 1.5em;
   margin-bottom: 1em;
 }
+.article .front-matter a.linkpost:before {
+  content: "→ ";
+}
 .article p {
   line-height: 150%;
 }
