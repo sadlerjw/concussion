@@ -22,12 +22,12 @@
   },
   "devDependencies": {
     "generator-express": "^2.7.2",
-    "gulp": "~3.8.10",
-    "gulp-less": "~3.0.1",
-    "gulp-nodemon": "~2.0.2",
-    "gulp-livereload": "~3.8.1",
-    "gulp-plumber": "~1.0.0",
-    "gulp-env": "^0.2.0",
-    "debug": "~2.2.0"
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.1",
+    "gulp-nodemon": "^2.0.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.0.0",
+    "gulp-env": "^0.4.0",
+    "debug": "^2.2.0"
   }
 }
