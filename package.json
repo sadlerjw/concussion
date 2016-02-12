@@ -10,7 +10,7 @@
     "serve-favicon": "~2.3.0",
     "morgan": "~1.6.1",
     "express-handlebars": "~3.0.0",
-    "highlight.js": "^8.6.0",
+    "highlight.js": "^9.1.0",
     "js-yaml": "~3.4.6",
     "q": "~1.4.1",
     "q-io": "~1.13.1",
