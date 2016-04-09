@@ -11,6 +11,7 @@ Concussion is a filesystem-based blogging engine inspired by [Camel]. It works i
     + [Posts](#posts)
     + [Resources](#resources)
 - [Customization](#customization)
+- [Change Log](#change-log)
 
 ## Running and Deploying
 
@@ -84,6 +85,12 @@ The appearance of posts, including rendering post metadata, is defined in [views
     <a class="linkpost" href="{{metadata.link}}">{{metadata.link}}</a>
 {{/if}}
 ```
+
+## Change Log
+
+* `1.0.2` Added support for footnotes
+* `1.0.1` Upgraded packages, including some that had security issues
+* `1.0.0` Initial release
 
 [http://localhost:3000/]: http://localhost:3000/
 [Camel]: https://github.com/cliss/camel
