@@ -1,11 +1,13 @@
 var md = require('markdown-it')({html: true, typographer: true});
 var hljs = require('markdown-it-highlightjs');
+var footnote = require('markdown-it-footnote');
 var qfs = require('q-io/fs');
 var Q = require('q');
 var moment = require('moment');
 var yaml = require('js-yaml');
 
 md.use(hljs);
+md.use(footnote, { use_uuids: true, omit_square_brackets: true });
 
 module.exports = function(postDirectory, caches) {
 

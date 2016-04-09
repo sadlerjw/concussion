@@ -16,6 +16,7 @@
     "q-io": "~1.13.1",
     "markdown-it": "^6.0.0",
     "markdown-it-highlightjs": "^2.0.0",
+    "markdown-it-footnote": "git://github.com/sadlerjw/markdown-it-footnote.git#hash-based-link",
     "moment": "^2.11.2",
     "rss": "~1.2.1",
     "compression": "^1.5.2"
