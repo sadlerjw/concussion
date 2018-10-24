@@ -1,7 +1,5 @@
 # Concussion
 
-[![bitHound Overalll Score](https://www.bithound.io/github/sadlerjw/concussion/badges/score.svg)](https://www.bithound.io/github/sadlerjw/concussion)
-
 Concussion is a filesystem-based blogging engine inspired by [Camel]. It works in much the same way, populating the site from Markdown files found in the `posts` folder.
 
 ## Table of Contents
@@ -17,7 +15,7 @@ Concussion is a filesystem-based blogging engine inspired by [Camel]. It works i
 
 Clone the repo, use `npm install` to pull down all the dependencies, and run `gulp` to start Concussion running at [http://localhost:3000/].
 
-My site, [sadlerjw.com], is deployed to Heroku. Since concussion populates the website from Markdown files stored on the filesystem, and Heroku has an [ephemeral filesystem][ephemeral], this means that posts need to be checked into the repository that you deploy to Heroku. This is nice for having a history of changes, and works well with Heroku's [Dropbox integration][heroku-dropbox], which syncs your most recent Heroku deploy to Dropbox. This means that if you're not at a computer with `git` (maybe you're on your iPad or something) you can edit and add posts in Dropbox, and then log into Heroku to deploy from Dropbox.
+When my site, [sadlerjw.com], was powered by Concussion, it was deployed to Heroku. Since concussion populates the website from Markdown files stored on the filesystem, and Heroku has an [ephemeral filesystem][ephemeral], this means that posts need to be checked into the repository that you deploy to Heroku. This is nice for having a history of changes, and works well with Heroku's [Dropbox integration][heroku-dropbox], which syncs your most recent Heroku deploy to Dropbox. This means that if you're not at a computer with `git` (maybe you're on your iPad or something) you can edit and add posts in Dropbox, and then log into Heroku to deploy from Dropbox.
 
 ## Caching
 
